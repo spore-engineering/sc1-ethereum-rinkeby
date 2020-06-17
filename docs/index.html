@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Spore | Dashboard Personas
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="./assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166964433-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-166964433-1');
+  </script>
+</head>
+
+<body class="">
+  <div class="wrapper ">
+   
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+
+            <a class="navbar-brand" href="javascript:;"><img src="./assets/img/spore-logo-lines.png" class="img-no-padding img-responsive" style="max-width: 25px;"> Spore :: Dashboard Personas</a>
+          </div>
+          <div class="justify-content-end" id="navigation">
+              <button id="btn-iniciar-sesion-metamask" class="btn btn-primary btn-round" style="margin:0;"> <i class="nc-icon nc-single-02"></i> INICIAR SESIÓN</button>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="content">
+
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card text-center">
+              <div class="card-body">
+                <h4 class="card-title">Ejemplo Práctico Alcance Blockchain</h4>
+                <p class="card-text">Cada vez que una nota sea ingresada, el contrato sumará 0.25 ETH.</p>
+              </div>
+              <div class="card-footer text-muted">
+                <b>Contrato:</b> <span id="indicador-direccion-contrato-almacenamiento">0x0</span> | <b>Acumulado:</b> <span id="indicador-eth-acumulado-contrato">0</span> ETH
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <img src="./assets/img/spore-logo-colored.png" class="img-no-padding img-responsive" style="max-width: 59px;">
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Cantidad</p>
+                        <p class="card-title"><span id="bloque-cantidad-total-spore">0</span> SPORE<p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+                  <div class="stats">
+                    Cantidad Total Esporas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <img src="./assets/img/ethereum.png" class="img-no-padding img-responsive" style="max-width: 59px;">
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Cantidad</p>
+                        <p class="card-title"><span id="bloque-cantidad-total-eth">0</span> ETH<p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+                  <div class="stats">
+                    Cantidad Total Ether
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <img src="./assets/img/blockchain.png" class="img-no-padding img-responsive" style="max-width: 59px;">
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Cantidad</p>
+                        <p class="card-title"><span id="bloque-cantidad-total-transacciones">0</span> TRANS<p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+                  <div class="stats">
+                    Cantidad Total Transacciones
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <img src="./assets/img/transactions.png" class="img-no-padding img-responsive" style="max-width: 59px;">
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Cantidad</p>
+                        <p class="card-title"><span id="bloque-cantidad-total-notas">0</span> NOTAS<p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+                  <div class="stats">
+                    Cantidad Total Notas
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="./assets/img/damir-bosnjak.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="./assets/img/mike.jpg" alt="...">
+                  </a>
+                  <input type="hidden" id="direccion-activa-persona-input">
+                  <p class="description" id="direccion-activa-persona" style="font-weight: bold;">
+                    0x0
+                  </p>
+                </div>
+                <p class="description text-center">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="nc-icon nc-paper"></i></div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Ingrese la nota que desee agregar" id="form-agregar-nota-texto">
+                  </div>
+                  <center><button class="btn btn-primary" id="btn-agregar-nota">Agregar Nota</button><p class="text-muted">Agregar Nota: 0.25 ETH</p></center>
+                </p>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="button-container">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                      <h5><img src="./assets/img/spore-logo-lines.png" class="img-no-padding img-responsive" style="max-width: 24px;">  10<br><small>Notas</small></h5>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                      <h5><img src="./assets/img/spore-logo-lines.png" class="img-no-padding img-responsive" style="max-width: 24px;">  20<br><small>Encuestas</small></h5>
+                    </div>
+                    <div class="col-lg-3 mr-auto">
+                      <h5><img src="./assets/img/spore-logo-lines.png" class="img-no-padding img-responsive" style="max-width: 24px;"> 50<br><small>Reportes</small></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            
+            <h5 class="card-title"><i class="nc-icon nc-paper"></i> Notas Agregadas</h5>
+            <div class="card">
+              <ul class="list-group list-group-flush" id="bloque-listado-notas">
+              </ul>
+            </div>
+       
+
+          </div>
+          <div class="col-md-8">
+            <div class="card card-user">
+              <div class="card-header">
+                <h5 class="card-title">Últimas Transacciones</h5>
+              </div>
+              <div class="card-body">
+                Pendiente...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+  <script src="./assets/js/core/popper.min.js"></script>
+  <script src="./assets/js/core/bootstrap.min.js"></script>
+  
+  <script>
+        $(document).ready(function() {
+
+          $.ajaxSetup({
+              async: false
+          });
+
+          $("#btn-iniciar-sesion-metamask").click(function() {
+            ethereum.send({ method: 'eth_requestAccounts' }, (error, response) => {
+              location.reload();
+            }); 
+          });
+          
+          $("#btn-agregar-nota").click(function() {
+            let address = document.getElementById("direccion-activa-persona-input").value;
+            let texto = document.getElementById("form-agregar-nota-texto").value;
+            
+            if($("#form-agregar-nota-texto").val()) {
+              if($("#direccion-activa-persona-input").val()) {
+                Almacenamiento.methods.escribirNota(texto, address).send({from: address, value: 250000000000000000}).then(function(e) {
+                  location.reload();
+                });
+              }
+              else {
+                alert("Hola!, para poder enviar notas, primero debes iniciar sesión");
+              }
+            }
+          });
+
+          let web3;
+
+          if (ethereum || ethereum.isMetaMask) {
+            web3 = new Web3(ethereum);
+            ethereum.autoRefreshOnNetworkChange = true;
+
+            ethereum.on('accountsChanged', function (accounts) {
+              location.reload();
+            });
+          }
+
+          let Almacenamiento = (function() {
+            let result;
+            let amount;
+            let address = '0x4AfBF87583dA6998961Ba8dc9CA19dd892058e88';
+
+            $.getJSON('./src/contracts/Almacenamiento.json', {}, function(data){
+              result = new web3.eth.Contract(data.abi, address);
+              
+              result.methods.totalMonto().call().then(function(e) {
+                amount = web3.utils.toWei(e, 'wei');
+                $("#indicador-eth-acumulado-contrato").html(amount);
+                $("#indicador-direccion-contrato-almacenamiento").html(address);
+              });
+
+            });
+            return result;
+          })();
+
+          let Token = (function() {
+            let result;
+            let address = '0x19217E92f13D9b702c32785ffDe5F95c90d82199';
+
+            $.getJSON('./src/contracts/Token.json', {}, function(data){
+              result = new web3.eth.Contract(data.abi, address);
+            });
+            return result;
+          })();
+
+          let Persona = (function() {
+            let address = "0x0";
+
+            web3.eth.getCoinbase(function(err, res) {
+              if(res){
+                address = res;
+                
+                $("#direccion-activa-persona").html(address);
+                document.getElementById("direccion-activa-persona-input").value = address
+                document.getElementById("btn-iniciar-sesion-metamask").disabled = true;
+
+                Token.methods.balanceOf(address).call().then(function(res) {
+                  amount = web3.utils.toWei(res, 'wei');
+                  $("#bloque-cantidad-total-spore").html(amount);
+                });
+
+                Almacenamiento.methods.totalNotas(address).call().then(function(res) {
+                  $("#bloque-cantidad-total-notas").html(res);
+                });
+
+                //Almacenamiento.methods.transferirFondos().send({from: address}).then(console.log);
+
+                web3.eth.getTransactionCount(address, function(err, res) {
+                  if(res){
+                    $("#bloque-cantidad-total-transacciones").html(res);
+                  }
+                });
+
+                web3.eth.getBalance(address, function(err, res) {
+                  if(res){
+                    amount = web3.utils.toWei(res, 'wei');
+                    $("#bloque-cantidad-total-eth").html(amount);
+                  }
+                });
+
+                Almacenamiento.methods.leerNotas(address).call().then(function(e) {
+                  $.each( e, function( index, value ){
+                    $("#bloque-listado-notas").append('<li class="list-group-item">&bull; '+value.detalle+'</li>'); 
+                  });
+                });
+
+              }
+            });
+
+            return address;
+          })();
+
+        });
+    </script>
+</body>
+
+</html>
