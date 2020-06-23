@@ -233,12 +233,25 @@
     </div>
   </div>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
   <script src="./assets/js/core/popper.min.js"></script>
   <script src="./assets/js/core/bootstrap.min.js"></script>
   
+<!-- Modal -->
+<div class="modal fade" id="modal-agregar-nota-red" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false" data-backdrop='static' data-keyboard='false'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Su nota está siendo validada</h5>
+      </div>
+      <div class="modal-body">
+        <img src="./assets/img/loading.gif" style="max-width: 16px;"> &nbsp; Espere por favor mientras su nota es agregada...
+      </div>
+  </div>
+</div>
+
   <script>
         $(document).ready(function() {
 
@@ -246,9 +259,32 @@
               async: false
           });
 
+          let web3;
+          let address;
+
+          if (ethereum || ethereum.isMetaMask) {
+            web3 = new Web3(ethereum);
+            //ethereum.autoRefreshOnNetworkChange = true;
+          }
+
+          let Almacenamiento = getAlmacenamiento(web3);
+          let Token = getToken(web3);
+          let Persona = getPersona();
+
+          ethereum.on('accountsChanged', function (accounts) {
+
+            document.getElementById('direccion-activa-persona').innerHTML = accounts[0];
+            document.getElementById("direccion-activa-persona-input").value = accounts[0];
+
+            Persona = getPersona();
+            address = accounts[0];
+            
+            return false;
+          });
+
           $("#btn-iniciar-sesion-metamask").click(function() {
             ethereum.send({ method: 'eth_requestAccounts' }, (error, response) => {
-              location.reload();
+              location.reload(true);
             }); 
           });
           
@@ -258,8 +294,11 @@
             
             if($("#form-agregar-nota-texto").val()) {
               if($("#direccion-activa-persona-input").val()) {
-                Almacenamiento.methods.escribirNota(texto, address).send({from: address, value: 250000000000000000}).then(function(e) {
-                  location.reload();
+                $('#modal-agregar-nota-red').modal('show');
+
+                Almacenamiento.methods.escribirNota(texto, address).send({from: address, value: 250000000000000000}).on('error', function(error){ $('#modal-agregar-nota-red').modal('hide'); }).then(function(e) {
+                  location.reload(true);
+                  $('#modal-agregar-nota-red').modal('hide');
                 });
               }
               else {
@@ -268,46 +307,37 @@
             }
           });
 
-          let web3;
-
-          if (ethereum || ethereum.isMetaMask) {
-            web3 = new Web3(ethereum);
-            ethereum.autoRefreshOnNetworkChange = true;
-
-            ethereum.on('accountsChanged', function (accounts) {
-              location.reload();
-            });
-          }
-
-          let Almacenamiento = (function() {
+          function getAlmacenamiento(web3) {
             let result;
             let amount;
-            let address = '0x4AfBF87583dA6998961Ba8dc9CA19dd892058e88';
+            let contractAddress = '0x4AfBF87583dA6998961Ba8dc9CA19dd892058e88';
 
             $.getJSON('./src/contracts/Almacenamiento.json', {}, function(data){
-              result = new web3.eth.Contract(data.abi, address);
+              result = new web3.eth.Contract(data.abi, contractAddress);
               
               result.methods.totalMonto().call().then(function(e) {
-                amount = web3.utils.toWei(e, 'wei');
+                amount = web3.utils.fromWei(e, 'ether');
                 $("#indicador-eth-acumulado-contrato").html(amount);
-                $("#indicador-direccion-contrato-almacenamiento").html(address);
+                $("#indicador-direccion-contrato-almacenamiento").html(contractAddress);
               });
 
             });
-            return result;
-          })();
 
-          let Token = (function() {
+            return result;
+          }
+
+          function getToken(web3) {
             let result;
-            let address = '0x19217E92f13D9b702c32785ffDe5F95c90d82199';
+            let contractAddress = '0x19217E92f13D9b702c32785ffDe5F95c90d82199';
 
             $.getJSON('./src/contracts/Token.json', {}, function(data){
-              result = new web3.eth.Contract(data.abi, address);
+              result = new web3.eth.Contract(data.abi, contractAddress);
             });
-            return result;
-          })();
 
-          let Persona = (function() {
+            return result;
+          }
+
+          function getPersona() {
             let address = "0x0";
 
             web3.eth.getCoinbase(function(err, res) {
@@ -319,30 +349,35 @@
                 document.getElementById("btn-iniciar-sesion-metamask").disabled = true;
 
                 Token.methods.balanceOf(address).call().then(function(res) {
-                  amount = web3.utils.toWei(res, 'wei');
+                  amount = web3.utils.fromWei(res, 'ether');
+                  $("#bloque-cantidad-total-spore").html('0');
                   $("#bloque-cantidad-total-spore").html(amount);
                 });
 
                 Almacenamiento.methods.totalNotas(address).call().then(function(res) {
+                  $("#bloque-cantidad-total-notas").html('0');
                   $("#bloque-cantidad-total-notas").html(res);
                 });
 
                 //Almacenamiento.methods.transferirFondos().send({from: address}).then(console.log);
 
                 web3.eth.getTransactionCount(address, function(err, res) {
+                  $("#bloque-cantidad-total-transacciones").html('0');
                   if(res){
                     $("#bloque-cantidad-total-transacciones").html(res);
                   }
                 });
 
                 web3.eth.getBalance(address, function(err, res) {
+                  $("#bloque-cantidad-total-eth").html('0');
                   if(res){
-                    amount = web3.utils.toWei(res, 'wei');
+                    amount = web3.utils.fromWei(res, 'ether');
                     $("#bloque-cantidad-total-eth").html(amount);
                   }
                 });
 
                 Almacenamiento.methods.leerNotas(address).call().then(function(e) {
+                  $("#bloque-listado-notas").html('');
                   $.each( e, function( index, value ){
                     $("#bloque-listado-notas").append('<li class="list-group-item">&bull; '+value.detalle+'</li>'); 
                   });
@@ -351,8 +386,7 @@
               }
             });
 
-            return address;
-          })();
+          }
 
         });
     </script>
